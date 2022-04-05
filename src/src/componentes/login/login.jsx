@@ -1,7 +1,7 @@
 import { authToken } from "../../general.js"
 import { useState } from "react";
 
-function Login() {
+function Login({setID, setPASS}) {
     const url = "https://web-develop-react-express-chat.herokuapp.com/login/";
     const [login, setLogin] = useState("");
     const [usertext, setUserText] = useState("");
@@ -26,8 +26,11 @@ function Login() {
             }
             
             );
-        setLogin(await response.json());
-        //console.log(login);
+        const identificador=await response.json();
+        setLogin(identificador);
+        setID(identificador);
+        setPASS(passwordtext);
+        console.log(login);
 
     }
 
