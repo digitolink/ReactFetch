@@ -5,16 +5,12 @@ import Messages from './componentes/messages/messages';
 import SendMessage from './componentes/sendmessage/sendmessage';
 import { useState } from 'react';
 
-/*
-      <Login />
-      <SendMessage id="1649067171162" password="ms4" />
-      <Messages id="1649067171162" password="ms4" />
-*/
-
 function App() {
   return (
     <>
-      <Messages id="1649067171162" password="ms4" />
+     <Login/>
+     <SendMessage id="1649141341919" password="ms4" />
+     <Messages id="1649141341919" password="ms4" />
 
     </>
   );

@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authToken } from "../../general.js"
 
 function Messages({id,password}) {
     const url = "https://web-develop-react-express-chat.herokuapp.com/messages/";
     const token = authToken(id, password);
     const [messages, setMessages] = useState("");
+    useEffect(
+        ()=>{
+            setInterval(MessagesHandler,1000);
+            console.log("hola")
+            
+        },
+            []
+        
+    )
 
     async function MessagesHandler() {
 
@@ -13,19 +22,18 @@ function Messages({id,password}) {
             {
                 method: "GET",
                 headers: {
-                    'Content-Type': 'application/json;charset=utf-8',
                     Authorization: token
                 }
             }
         );
-        setInterval(setMessages(response.json()),1000);
-        return response.json();
+        setMessages(await response.text());
+        return messages;
 
     }
     return (
         <>
-           <p onChange={MessagesHandler}>
-           </p>
+           <h2>Mensajes: </h2>
+           <p>{messages}</p>
         </>
 
 

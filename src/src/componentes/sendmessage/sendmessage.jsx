@@ -4,8 +4,15 @@ import { authToken } from "../../general.js"
 function SendMessage({id,password}) {
     const url = "https://web-develop-react-express-chat.herokuapp.com/message/";
     const token = authToken(id, password);
-    const mensaje = document.querySelector("#mensaje");
+    
     const [message, setSendMessage] = useState("");
+    const [savedmessage, setSavedMessage] = useState("");
+
+    const data={"content":savedmessage};
+
+    function SaveHandler(event){
+        setSavedMessage(event.target.value);
+    }
 
     async function SendMessageHandler() {
 
@@ -13,17 +20,21 @@ function SendMessage({id,password}) {
             url,
             {
                 method: "POST",
-                body: mensaje,
+                body: JSON.stringify(data),
                 headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
                     Authorization: token
                 }
             }
         );
         setSendMessage(response);
+        console.log(message);
     }
+    
+
     return (
         <>
-           <textarea id="mensaje" cols="30" rows="10">
+           <textarea onChange= {SaveHandler} id="mensaje" cols="30" rows="10">
            </textarea>
            <input onClick={SendMessageHandler} type="button" value="Enviar mensaje" />
         </>

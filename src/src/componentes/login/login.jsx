@@ -40,7 +40,7 @@ function Login() {
     }
     return (
         <>
-            <label htmlFor="user">Usuario: </label>
+            <label htmlFor="user">Usuario a crear: </label>
             <input type="text" name="user"
                    placeholder="indica nombre de usuario"
                    onChange={UserTextHandler} value = {usertext} />
