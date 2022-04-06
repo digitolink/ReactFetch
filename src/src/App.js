@@ -9,15 +9,18 @@ import { useState } from 'react';
   <Messages id="1649141341919" password="ms4" />
 */
 function App() {
-  const [ident,setId] = useState("");
-  const [password, setPass] = useState("");
+  const [datosPadre,setDatosPadre] = useState({
+    id: 0,
+    password: ""
+});
 
   return (
-    <>      
-     <Login setID={setId} setPASS={setPass}/>
+    <>   
+     <h1>Componente principal:</h1>   
+     <Login parentSetter={setDatosPadre}/>
      <br></br>
-     <SendMessage id={ident} password={password} />
-     <Messages id={ident} password={password} />
+     <SendMessage datos={datosPadre} />
+     <Messages datos={datosPadre}/>
 
     </>
   );

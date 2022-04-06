@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { authToken } from "../../general.js"
 
-function SendMessage({id,password}) {
+function SendMessage({datos}) {
     const url = "https://web-develop-react-express-chat.herokuapp.com/message/";
-    const token = authToken(id, password);
+    const token = authToken(datos.id, datos.password);
     
     const [message, setSendMessage] = useState("");
     const [savedmessage, setSavedMessage] = useState("");
@@ -34,6 +34,7 @@ function SendMessage({id,password}) {
 
     return (
         <>
+           <h1>Enviar mensaje: </h1>
            <textarea onChange= {SaveHandler} id="mensaje" cols="30" rows="10">
            </textarea>
            <input onClick={SendMessageHandler} type="button" value="Enviar mensaje" />

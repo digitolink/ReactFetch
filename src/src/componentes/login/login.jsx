@@ -1,15 +1,13 @@
 import { authToken } from "../../general.js"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Login({setID, setPASS}) {
+function Login({parentSetter}) {
     const url = "https://web-develop-react-express-chat.herokuapp.com/login/";
-    const [login, setLogin] = useState("");
+    const [login, setLogin] = useState(0);
     const [usertext, setUserText] = useState("");
     const [passwordtext, setPasswordText] = useState("");
 
-
-
-    async function LoginHandler(event) {
+    async function LoginHandler() {
         const data = {
             userName: usertext,
             password: passwordtext
@@ -28,11 +26,19 @@ function Login({setID, setPASS}) {
             );
         const identificador=await response.json();
         setLogin(identificador);
-        setID(identificador);
-        setPASS(passwordtext);
         console.log(login);
 
     }
+
+    useEffect(
+        ()=>{
+            parentSetter({
+                id: login,
+                password: passwordtext
+            })
+        },
+        [login,passwordtext]
+    )
 
     function UserTextHandler(event){
         setUserText(event.target.value);
@@ -43,6 +49,7 @@ function Login({setID, setPASS}) {
     }
     return (
         <>
+            <h1>Login: </h1>
             <label htmlFor="user">Usuario a crear: </label>
             <input type="text" name="user"
                    placeholder="indica nombre de usuario"

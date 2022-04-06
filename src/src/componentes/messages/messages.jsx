@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { authToken } from "../../general.js"
 
-function Messages({id,password}) {
+function Messages({datos}) {
     const url = "https://web-develop-react-express-chat.herokuapp.com/messages/";
-    const token = authToken(id, password);
+    const token = authToken(datos.id, datos.password);
     const [messages, setMessages] = useState("");
+    const timer = useRef(0)
     useEffect(
         ()=>{
-            setInterval(MessagesHandler,1000);
-            console.log("hola")
-            
+            if (timer.current !== 0) clearInterval(timer.current)
+            timer.current = setInterval(MessagesHandler,1000);
+            console.log("hola");   
         },
-            []
+            [datos]
         
     )
 
