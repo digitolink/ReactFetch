@@ -12,15 +12,22 @@ function App() {
   const [datosPadre,setDatosPadre] = useState({
     id: 0,
     password: ""
-});
+  });
+  const [loggedIn, SetLoggedIn] = useState(true);
+
+  function loginHandler(){
+    SetLoggedIn(!loggedIn);
+
+  }
 
   return (
     <>   
      <h1>Componente principal:</h1>   
-     <Login parentSetter={setDatosPadre}/>
+     {loggedIn && <Login parentSetter={setDatosPadre}/>}
      <br></br>
-     <SendMessage datos={datosPadre} />
-     <Messages datos={datosPadre}/>
+     {!loggedIn && <SendMessage datos={datosPadre}/>}
+     {!loggedIn && <Messages datos={datosPadre}/>}
+     <button onClick={loginHandler}>Login</button>
 
     </>
   );
